@@ -1,11 +1,11 @@
 from sqlalchemy.exc import NoResultFound, IntegrityError
 
-from repositories.base import DatabaseRepository
+from repositories.base import AbstractRepository
 
 
 class BaseService:
-    def __init__(self, repository: DatabaseRepository = DatabaseRepository):
-        self.repository: DatabaseRepository = repository()
+    def __init__(self, repository: type[AbstractRepository]):
+        self.repository: AbstractRepository = repository()
 
     async def get(self, **kwargs):
         try:
